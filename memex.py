@@ -5,8 +5,8 @@ from os import listdir
 from os.path import isfile, join
 import os, sys, getopt
 
-directory = '/Users/felix/memex/Notes/'
-fileDir = '/Users/felix/memex/'
+directory = '/Users/YOUROWNDIR/memex/Notes/'
+fileDir = '/Users/YOUROWNDIR/memex/'
 
 file = open(fileDir+'subjects.txt')
 subjects = file.readlines()
@@ -21,12 +21,12 @@ if '.DS_Store' in files:
     files.remove('.DS_Store')
 
 def help():
-    print('memex -h -e <subject> -r -v -s\n')
+    print('memex -h -e <subject> -r -V -v\n')
     print('\t-h --help\t\tGet help')
     print('\t-e --edit <subject>\tEdit notes')
     print('\t-r --review\t\tReview')
-    print('\t-v --version\t\tDisplay Version')
-    print('\t-s --scan <subject>\tView Notes')
+    print('\t-V --version\t\tDisplay Version')
+    print('\t-v --view <subject>\tView Notes')
 
 
 def edit(subject):
@@ -91,7 +91,7 @@ def review():
         else:
             print('No notes in to review today!')
 
-def scan(subject):
+def view(subject):
     print(subject)
     print('(view function is not available yet)')
 
@@ -99,7 +99,7 @@ def scan(subject):
 if __name__ == '__main__':
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'he:rvs:', ['help','edit=','review','version','scan='])
+        opts, args = getopt.getopt(sys.argv[1:], 'he:rVv:', ['help','edit=','review','version','view='])
 
     except getopt.GetoptError:
         print('Error: Invalid argument(s)\n')
@@ -114,7 +114,7 @@ if __name__ == '__main__':
             edit(arg)
         elif opt in ['-r', '--review']:
             review()
-        elif opt in ['-v', '--version']:
-            print(VERSION)
-        elif opt in ['-s','--scan']:
-            scan(arg)
+        elif opt in ['-V', '--version']:
+            print('memex prerelease version',VERSION)
+        elif opt in ['-v','--view']:
+            view(arg)
