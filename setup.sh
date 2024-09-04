@@ -1,7 +1,8 @@
 chmod +x memex.py
 mv memex.py memex
 mkdir -p ~/bin
-cp memex ~/bin
-echo 'export PATH=$PATH":$HOME/bin"' >> .profile
+cp -av memex ~/bin
 
-source .profile
+echo 'export PATH=$PATH":$HOME/bin"' >> Users/felix/.zprofile
+
+source Users/felix/.zprofile

@@ -5,20 +5,28 @@ from os import listdir
 from os.path import isfile, join
 import os, sys, getopt
 
-file = open('subjects.txt')
+directory = '/Users/felix/memex/Notes/'
+fileDir = '/Users/felix/memex/'
+
+file = open(fileDir+'subjects.txt')
 subjects = file.readlines()
 intervalDays = []
-directory = 'Notes/'
+
+VERSION = '0.1.0'
 
 currentDate = date.today()
 tempCurrentDate = str(currentDate)
 files = [f for f in listdir(directory) if isfile(join(directory, f))]
+if '.DS_Store' in files:
+    files.remove('.DS_Store')
 
 def help():
-    print('memex -h -e <subject>\n')
-    print('\t-h\t\t\tGet help')
-    print('\t-e\t\t\tEdit notes')
-    print('\t-r\t\t\tReview')
+    print('memex -h -e <subject> -r -v -s\n')
+    print('\t-h --help\t\tGet help')
+    print('\t-e --edit <subject>\tEdit notes')
+    print('\t-r --review\t\tReview')
+    print('\t-v --version\t\tDisplay Version')
+    print('\t-s --scan <subject>\tView Notes')
 
 
 def edit(subject):
@@ -80,42 +88,18 @@ def review():
                     contents = temp[i]
                 print(contents)
             input('press enter when ready')
+        else:
+            print('No notes in to review today!')
 
+def scan(subject):
+    print(subject)
+    print('(view function is not available yet)')
 
-'''
-if __name__ == '__main__':
-
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "h:e:r", ['help', 'edit=', 'review'])
-
-    except getopt.GetoptError:
-        print('Error: Invalid argument(s)\n')
-        help()
-        sys.exit(2)
-
-    eula = ''
-
-    try:
-        for opt, arg in opts:
-            if opt in ('-h', '--help'):
-                help()
-                sys.exit()
-            elif opt in ('-e', '--edit'):
-                edit()
-            elif opt in ('-r', '--review'):
-                review()
-
-
-    except (TypeError, ValueError):
-        print('Error: Invalid argument(s)\n')
-        help()
-        sys.exit(2)
-'''
 
 if __name__ == '__main__':
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'he:r', ['help','edit=','review'])
+        opts, args = getopt.getopt(sys.argv[1:], 'he:rvs:', ['help','edit=','review','version','scan='])
 
     except getopt.GetoptError:
         print('Error: Invalid argument(s)\n')
@@ -130,3 +114,7 @@ if __name__ == '__main__':
             edit(arg)
         elif opt in ['-r', '--review']:
             review()
+        elif opt in ['-v', '--version']:
+            print(VERSION)
+        elif opt in ['-s','--scan']:
+            scan(arg)
