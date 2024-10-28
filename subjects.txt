@@ -1,24 +1,3 @@
-#Delete everything in this file before you make changes and additions (Including the comments) !
-
-#Examples subjects format:
-
-Maths
+Chinese
 English
-Science
-
-#Examples for subjects consisting multiple words:
-
-ComputerScience
-AdvancedPhysics
-
-#Or
-
-Computer_Science
-Advanced_Physics
-
-#Or
-
-CS
-AP
-
-#Just remember: No whitespace allowed!
+Physics
